@@ -1,0 +1,5 @@
+{
+  "name": "Mnemonic Splitter",
+  "description": "Securely split your 12-word seed phrase into 3 mnemonic shards. Any 2 shards can reconstruct the original secret.",
+  "requestFramePermissions": []
+}
