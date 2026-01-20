@@ -30,17 +30,17 @@ export const SplitTab: React.FC = () => {
     <div className="space-y-8 animate-fade-in">
       <div className="space-y-4">
         <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 text-blue-200 text-sm">
-           <strong>How it works:</strong> Enter your 12-word mnemonic phrase. We will generate 3 "Shards". Each shard contains 8 words. You can recover your original phrase using <strong>any 2</strong> of these shards.
+           <strong>How it works:</strong> Enter your mnemonic phrase (12, 15, 18, 21, or 24 words). We will generate 3 overlapping "Shards". You can recover your original phrase using <strong>any 2</strong> of these shards.
         </div>
 
         <div>
           <label className="block text-sm font-medium text-slate-400 mb-2">
-            Original 12-Word Mnemonic
+            Original Mnemonic Phrase
           </label>
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="apple banana cherry ..."
+            placeholder="apple banana cherry date elder fig grape ..."
             className="w-full h-32 bg-slate-900 border border-slate-700 rounded-lg p-4 text-slate-200 placeholder-slate-600 focus:ring-2 focus:ring-primary focus:border-transparent font-mono outline-none resize-none"
             spellCheck={false}
           />

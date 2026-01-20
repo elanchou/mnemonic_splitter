@@ -38,13 +38,13 @@ export const RecoverTab: React.FC = () => {
   return (
     <div className="space-y-8 animate-fade-in">
         <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-4 text-purple-200 text-sm">
-           <strong>Recovery:</strong> Paste any 2 of your 8-word shards below. The system will detect the overlap and reconstruct the original 12-word sequence.
+           <strong>Recovery:</strong> Paste any 2 of your shards below. The system will detect the overlap and reconstruct the original sequence.
         </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-medium text-slate-400 mb-2">
-            First Share (8 words)
+            First Share
           </label>
           <textarea
             value={shareA}
@@ -56,7 +56,7 @@ export const RecoverTab: React.FC = () => {
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-400 mb-2">
-            Second Share (8 words)
+            Second Share
           </label>
           <textarea
             value={shareB}
@@ -83,7 +83,7 @@ export const RecoverTab: React.FC = () => {
           <div className="bg-primary/10 px-6 py-4 border-b border-primary/20 flex justify-between items-center">
             <h3 className="text-primary font-bold text-lg flex items-center gap-2">
                 <CheckIcon className="w-5 h-5" />
-                Recovered Mnemonic
+                Recovered Mnemonic ({result.length} words)
             </h3>
             <div className="flex gap-2">
                 <button

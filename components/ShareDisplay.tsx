@@ -44,7 +44,7 @@ export const ShareDisplay: React.FC<Props> = ({ share }) => {
       
       <div className="mt-4 pt-3 border-t border-slate-700/50">
         <p className="text-xs text-slate-500">
-            Contains 8 words. Any 2 shares can restore the full secret.
+            Contains {share.words.length} words. Any 2 shares can restore the full secret.
         </p>
       </div>
     </div>

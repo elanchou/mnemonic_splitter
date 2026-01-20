@@ -22,7 +22,7 @@ function App() {
             Mnemonic Shards
           </h1>
           <p className="mt-3 text-slate-400 max-w-lg mx-auto">
-            Securely split your 12-word seed phrase into 3 overlapping parts. Any 2 parts can reconstruct the original secret.
+            Securely split your mnemonic seed phrase into 3 overlapping parts. Supports 12, 15, 18, 21, and 24 words.
           </p>
         </div>
 
