@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Tab } from './types';
 import { SplitTab } from './components/SplitTab';
 import { RecoverTab } from './components/RecoverTab';
@@ -62,6 +63,7 @@ function App() {
           <p>This tool runs entirely in your browser. No data is sent to any server.</p>
         </footer>
       </div>
+      <Analytics />
     </div>
   );
 }
