@@ -2,66 +2,143 @@ import React, { useState } from 'react';
 import { Tab } from './types';
 import { SplitTab } from './components/SplitTab';
 import { RecoverTab } from './components/RecoverTab';
-import { ShieldIcon, SplitIcon, MergeIcon } from './components/Icons';
+import { CryptoUtils } from './components/CryptoUtils';
+import { ShieldCheck, Split, Combine, Home, FileText, User, Settings } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.SPLIT);
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-950 to-slate-900">
-      <div className="w-full max-w-5xl">
-        
-        {/* Header */}
-        <div className="text-center mb-10">
-          <div className="flex justify-center mb-4">
-            <div className="p-3 bg-gradient-to-br from-primary to-emerald-700 rounded-2xl shadow-xl shadow-emerald-900/30">
-                <ShieldIcon className="w-10 h-10 text-white" />
+    <div className="min-h-screen flex bg-[#0a0a0a] text-white font-mono selection:bg-red-500/30">
+      {/* Sidebar */}
+      <aside className="w-16 border-r border-neutral-800 flex flex-col items-center py-6 gap-8 bg-[#0a0a0a] z-10 shrink-0">
+        <div className="w-8 h-8 bg-white rounded-sm flex items-center justify-center text-black font-bold text-xl mb-4">
+          M
+        </div>
+        <nav className="flex flex-col gap-6 w-full items-center">
+          <button className="w-full flex justify-center py-2 text-red-500 border-l-2 border-red-500">
+            <Home className="w-5 h-5" />
+          </button>
+          <button className="w-full flex justify-center py-2 text-neutral-500 hover:text-white transition-colors border-l-2 border-transparent">
+            <FileText className="w-5 h-5" />
+          </button>
+          <button className="w-full flex justify-center py-2 text-neutral-500 hover:text-white transition-colors border-l-2 border-transparent">
+            <User className="w-5 h-5" />
+          </button>
+          <button className="w-full flex justify-center py-2 text-neutral-500 hover:text-white transition-colors border-l-2 border-transparent">
+            <Settings className="w-5 h-5" />
+          </button>
+        </nav>
+        <div className="mt-auto">
+          <button className="w-10 h-10 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center overflow-hidden">
+            <User className="w-5 h-5 text-neutral-400" />
+          </button>
+        </div>
+      </aside>
+
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Top Navigation Bar */}
+        <header className="border-b border-neutral-800 p-4 flex items-center gap-4 text-xs text-neutral-500 uppercase tracking-widest bg-[#0a0a0a]">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 border border-neutral-600 flex items-center justify-center">
+              <div className="w-2 h-2 bg-neutral-600"></div>
+            </div>
+            <span>HOME</span>
+            <span className="text-neutral-700">&gt;</span>
+            <span className="text-white">MNEMONIC SHARDS</span>
+          </div>
+        </header>
+
+        <main className="flex-1 p-6 md:p-10 overflow-auto">
+          <div className="max-w-7xl mx-auto w-full">
+            <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
+              <div>
+                <h1 className="text-5xl md:text-6xl font-display uppercase tracking-widest mb-2">
+                  SHARDS
+                </h1>
+                <p className="text-neutral-500 text-xs uppercase tracking-widest">
+                  Securely split your mnemonic seed phrase.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-8 text-xs uppercase tracking-widest">
+                <div>
+                  <div className="text-neutral-500 mb-1">Active Scheme</div>
+                  <div className="text-white text-xl font-display">2-OF-3</div>
+                </div>
+                <div className="h-10 w-px bg-neutral-800"></div>
+                <div>
+                  <div className="text-neutral-500 mb-1">Security Level</div>
+                  <div className="text-red-500 flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4" /> HIGH
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Dashboard Grid Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              
+              {/* Left Sidebar / Tabs */}
+              <div className="lg:col-span-3 xl:col-span-2 flex flex-col gap-4">
+                <button
+                  onClick={() => setActiveTab(Tab.SPLIT)}
+                  className={`p-4 text-left text-xs uppercase tracking-widest border transition-colors flex items-center justify-between ${
+                    activeTab === Tab.SPLIT
+                      ? 'bg-red-600 text-white border-red-600'
+                      : 'bg-[#111] text-neutral-400 border-neutral-800 hover:border-neutral-600 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Split className="w-4 h-4" />
+                    Split
+                  </div>
+                  {activeTab === Tab.SPLIT && <span className="text-lg leading-none">+</span>}
+                </button>
+                <button
+                  onClick={() => setActiveTab(Tab.RECOVER)}
+                  className={`p-4 text-left text-xs uppercase tracking-widest border transition-colors flex items-center justify-between ${
+                    activeTab === Tab.RECOVER
+                      ? 'bg-red-600 text-white border-red-600'
+                      : 'bg-[#111] text-neutral-400 border-neutral-800 hover:border-neutral-600 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Combine className="w-4 h-4" />
+                    Recover
+                  </div>
+                  {activeTab === Tab.RECOVER && <span className="text-lg leading-none">+</span>}
+                </button>
+              </div>
+
+              {/* Main Content Area */}
+              <div className="lg:col-span-6 xl:col-span-7">
+                <div className="border border-neutral-800 p-6 md:p-8 bg-[#111]">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeTab}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {activeTab === Tab.SPLIT ? <SplitTab /> : <RecoverTab />}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Right Sidebar / Utilities */}
+              <div className="lg:col-span-3 xl:col-span-3">
+                <CryptoUtils />
+              </div>
             </div>
           </div>
-          <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 tracking-tight">
-            Mnemonic Shards
-          </h1>
-          <p className="mt-3 text-slate-400 max-w-lg mx-auto">
-            Securely split your mnemonic seed phrase into 3 overlapping parts. Supports 12, 15, 18, 21, and 24 words.
-          </p>
-        </div>
-
-        {/* Tab Navigation */}
-        <div className="bg-surface rounded-2xl border border-slate-800 p-1 mb-8 flex shadow-lg w-full max-w-md mx-auto">
-          <button
-            onClick={() => setActiveTab(Tab.SPLIT)}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all duration-200 ${
-              activeTab === Tab.SPLIT
-                ? 'bg-slate-700 text-white shadow-md'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
-            }`}
-          >
-            <SplitIcon className="w-4 h-4" />
-            Split Secret
-          </button>
-          <button
-            onClick={() => setActiveTab(Tab.RECOVER)}
-            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold transition-all duration-200 ${
-              activeTab === Tab.RECOVER
-                ? 'bg-slate-700 text-white shadow-md'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
-            }`}
-          >
-            <MergeIcon className="w-4 h-4" />
-            Recover Secret
-          </button>
-        </div>
-
-        {/* Content Area */}
-        <div className="bg-surface/50 border border-slate-800 rounded-3xl p-6 md:p-10 shadow-2xl backdrop-blur-sm">
-          {activeTab === Tab.SPLIT ? <SplitTab /> : <RecoverTab />}
-        </div>
-
-        {/* Footer */}
-        <footer className="mt-12 text-center text-xs text-slate-600">
-          <p>This tool runs entirely in your browser. No data is sent to any server.</p>
-        </footer>
+        </main>
       </div>
+      {typeof window !== 'undefined' && window.location.hostname.includes('vercel.app') && <Analytics />}
     </div>
   );
 }

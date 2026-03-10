@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Silkscreen&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0a0a0a;
+  --color-surface: #111111;
+  --color-primary: #ff3333;
+  --color-primaryHover: #cc0000;
+  --color-secondary: #888888;
+  --font-sans: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Silkscreen", cursive;
+}
+
+body {
+  background-color: var(--color-background);
+  color: #ffffff;
+}

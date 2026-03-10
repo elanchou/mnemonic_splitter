@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Share } from '../types';
-import { CopyIcon, CheckIcon } from './Icons';
+import { Copy, Check } from 'lucide-react';
 
 interface Props {
   share: Share;
@@ -16,35 +16,36 @@ export const ShareDisplay: React.FC<Props> = ({ share }) => {
   };
 
   return (
-    <div className="bg-surface rounded-xl border border-slate-700 p-5 shadow-lg flex flex-col h-full hover:border-primary/50 transition-colors">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex items-center gap-2">
-            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/20 text-primary text-xs font-bold border border-primary/30">
-                {share.id}
-            </span>
-            <h3 className="text-slate-200 font-semibold">{share.label}</h3>
+    <div className="border border-neutral-800 flex flex-col h-full group bg-[#0a0a0a] relative">
+      <div className="absolute top-0 left-0 w-1 h-full bg-neutral-800 group-hover:bg-red-600 transition-colors"></div>
+      <div className="flex justify-between items-center p-4 border-b border-neutral-800 bg-[#111] pl-5">
+        <div className="flex items-center gap-3">
+          <span className="text-red-500 text-xs font-bold border border-red-500/30 px-2 py-1 bg-red-500/10">
+            {share.id}
+          </span>
+          <h3 className="text-white font-bold tracking-widest uppercase text-xs">{share.label}</h3>
         </div>
         <button
           onClick={handleCopy}
-          className="text-secondary hover:text-white transition-colors"
+          className="text-neutral-500 hover:text-red-500 transition-colors"
           title="Copy to clipboard"
         >
-          {copied ? <CheckIcon className="w-5 h-5 text-green-500" /> : <CopyIcon className="w-5 h-5" />}
+          {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
         </button>
       </div>
 
-      <div className="grid grid-cols-2 gap-2 font-mono text-sm">
+      <div className="p-4 pl-5 grid grid-cols-2 sm:grid-cols-3 gap-2 font-mono text-xs">
         {share.words.map((word, idx) => (
-          <div key={idx} className="flex items-center bg-slate-900/50 rounded px-2 py-1.5 border border-slate-800">
-            <span className="text-slate-500 mr-2 w-4 text-right select-none">{idx + 1}.</span>
-            <span className="text-slate-200">{word}</span>
+          <div key={idx} className="flex items-center border border-neutral-800 px-2 py-1.5 bg-[#111]">
+            <span className="text-neutral-600 mr-2 w-4 text-right select-none">{idx + 1}.</span>
+            <span className="text-neutral-300 uppercase tracking-wider">{word}</span>
           </div>
         ))}
       </div>
-      
-      <div className="mt-4 pt-3 border-t border-slate-700/50">
-        <p className="text-xs text-slate-500">
-            Contains {share.words.length} words. Any 2 shares can restore the full secret.
+
+      <div className="mt-auto p-4 pl-5 border-t border-neutral-800 bg-[#111]">
+        <p className="text-xs text-neutral-500 uppercase tracking-widest">
+          Contains <strong className="text-white">{share.words.length}</strong> words.
         </p>
       </div>
     </div>
